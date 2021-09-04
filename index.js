@@ -11,7 +11,15 @@ let fiat = {
     fuel: 0,
 
     start: function () {
-        this.started = true;
+        if (this.fuel === 0) {
+            alert('The car is on empty, fill up before starting!');
+        } else {
+            this.started = true;
+
+            if (this.fuel === 1) {
+                alert('The fuel is running out! You need to fill up the car.');
+            }
+        }
     },
 
     stop: function () {
@@ -24,9 +32,13 @@ let fiat = {
                 alert(this.make + ' ' +
                     this.model + ' goes zoom zoom!');
                 this.fuel--;
-            } else {
-                alert('Uh oh, out of fuel.');
-                this.stop();
+
+                if (this.fuel === 1) {
+                    alert('The fuel is running out! You need to fill up the car.');
+                } else if (this.fuel === 0) {
+                    alert('Uh oh, out of fuel.');
+                    this.stop();
+                }
             }
         } else {
             alert('You need to start the engine first.');
@@ -39,15 +51,21 @@ let fiat = {
 };
 
 fiat.start();
-fiat.drive();
 fiat.addFuel(2);
+fiat.drive();
 fiat.start();
 fiat.drive();
 fiat.drive();
 fiat.drive();
+fiat.start();
 fiat.addFuel(3);
 fiat.start();
 fiat.drive();
+fiat.drive();
+fiat.stop();
+fiat.start();
+fiat.addFuel(4);
+alert(fiat.fuel);
 fiat.drive();
 fiat.stop();
 alert(fiat.fuel);
